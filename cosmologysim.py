@@ -11,7 +11,7 @@ import scipy.stats as stats
 #Define Constants
 Ng = 128
 R_bound = 1.0
-a_int = 0.1
+
 mesh1d = cp.linspace(0, R_bound, Ng, endpoint=False)
 mesh = cp.stack(
     cp.meshgrid(
@@ -55,7 +55,7 @@ class Simulation():
         self.dt = deltat
         self.nsteps = nsteps
         self.densityTemplate = cp.zeros((Ng, Ng, Ng))
-        self.a = a_int
+        self.a = 1/(z_int+1) 
         self.model = model
         self.H0 = 1
     
@@ -315,4 +315,5 @@ pl.close()
 pl2 = pv.Plotter()
 
 pl2.add_volume(density[-1], opacity="linear", clim=[0,80])
+
 pl2.show()
